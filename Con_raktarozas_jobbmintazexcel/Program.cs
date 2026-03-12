@@ -492,5 +492,44 @@ namespace DolgozoiNyilvantarto
             }
         }
 
+          static void Betoltes()
+  {
+      try
+      {
+          if (!File.Exists(fajlNev))
+          {
+              return;
+          }
+
+          StreamReader sr = new StreamReader(fajlNev);
+
+          while (!sr.EndOfStream)
+          {
+              string sor = sr.ReadLine();
+              string[] adatok = sor.Split(';');
+
+              if (adatok.Length == 5)
+              {
+                  Dolgozo d = new Dolgozo();
+                  d.Azonosito = adatok[0];
+                  d.Nev = adatok[1];
+                  d.Reszleg = adatok[2];
+                  d.Fizetes = int.Parse(adatok[3]);
+                  d.Eletkor = int.Parse(adatok[4]);
+
+                  dolgozok[db] = d;
+                  db++;
+              }
+          }
+
+          sr.Close();
+      }
+      catch
+      {
+          Console.WriteLine("Hiba betöltés közben!");
+          Console.ReadKey();
+      }
+  }
+
     }
 }
