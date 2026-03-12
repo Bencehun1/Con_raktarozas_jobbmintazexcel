@@ -205,5 +205,31 @@ namespace DolgozoiNyilvantarto
     Console.ReadKey();
 }
 
+         static void Kereses()
+ {
+     Console.Clear();
+     Console.WriteLine("=== DOLGOZÓ KERESÉSE ===");
+     Console.Write("Adja meg az azonosítót: ");
+     string azon = Console.ReadLine();
+
+     int index = KeresIndex(azon);
+
+     if (index == -1)
+     {
+         Console.WriteLine("Nincs ilyen dolgozó.");
+     }
+     else
+     {
+         Console.WriteLine("Azonosító: " + dolgozok[index].Azonosito);
+         Console.WriteLine("Név: " + dolgozok[index].Nev);
+         Console.WriteLine("Részleg: " + dolgozok[index].Reszleg);
+         Console.WriteLine("Fizetés: " + dolgozok[index].Fizetes + " Ft");
+         Console.WriteLine("Életkor: " + dolgozok[index].Eletkor);
+     }
+
+     Console.WriteLine("Nyomjon egy gombot a folytatáshoz...");
+     Console.ReadKey();
+ }
+
     }
 }
