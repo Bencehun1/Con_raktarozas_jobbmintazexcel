@@ -72,6 +72,109 @@ namespace DolgozoiNyilvantarto
             }
         }
 
+        static void UjDolgozo()
+{
+    Console.Clear();
+    Console.WriteLine("=== ÚJ DOLGOZÓ FELVÉTELE ===");
+
+    if (db >= dolgozok.Length)
+    {
+        Console.WriteLine("Megtelt a nyilvántartás.");
+        Console.ReadKey();
+        return;
+    }
+
+    Dolgozo uj = new Dolgozo();
+
+    Console.Write("Azonosító: ");
+    string azon = Console.ReadLine();
+
+    if (azon == "")
+    {
+        Console.WriteLine("Az azonosító nem lehet üres!");
+        Console.ReadKey();
+        return;
+    }
+
+    if (LetezikAzonosito(azon))
+    {
+        Console.WriteLine("Ez az azonosító már létezik!");
+        Console.ReadKey();
+        return;
+    }
+
+    uj.Azonosito = azon;
+
+    Console.Write("Név: ");
+    string nev = Console.ReadLine();
+
+    if (nev == "")
+    {
+        Console.WriteLine("A név nem lehet üres!");
+        Console.ReadKey();
+        return;
+    }
+
+    uj.Nev = nev;
+
+    Console.Write("Részleg: ");
+    string reszleg = Console.ReadLine();
+
+    if (reszleg == "")
+    {
+        Console.WriteLine("A részleg nem lehet üres!");
+        Console.ReadKey();
+        return;
+    }
+
+    uj.Reszleg = reszleg;
+
+    try
+    {
+        Console.Write("Fizetés: ");
+        uj.Fizetes = int.Parse(Console.ReadLine());
+
+        if (uj.Fizetes < 0)
+        {
+            Console.WriteLine("A fizetés nem lehet negatív!");
+            Console.ReadKey();
+            return;
+        }
+    }
+    catch
+    {
+        Console.WriteLine("Hibás fizetés adat!");
+        Console.ReadKey();
+        return;
+    }
+
+    try
+    {
+        Console.Write("Életkor: ");
+        uj.Eletkor = int.Parse(Console.ReadLine());
+
+        if (uj.Eletkor < 16 || uj.Eletkor > 100)
+        {
+            Console.WriteLine("Az életkor nem megfelelő!");
+            Console.ReadKey();
+            return;
+        }
+    }
+    catch
+    {
+        Console.WriteLine("Hibás életkor adat!");
+        Console.ReadKey();
+        return;
+    }
+
+    dolgozok[db] = uj;
+    db++;
+
+    Console.WriteLine("Dolgozó sikeresen felvéve.");
+    Console.WriteLine("Nyomjon egy gombot a folytatáshoz...");
+    Console.ReadKey();
+}
+        
 
     }
 }
