@@ -231,5 +231,84 @@ namespace DolgozoiNyilvantarto
      Console.ReadKey();
  }
 
+                static void Modositas()
+        {
+            Console.Clear();
+            Console.WriteLine("=== DOLGOZÓ MÓDOSÍTÁSA ===");
+            Console.Write("Adja meg a módosítandó dolgozó azonosítóját: ");
+            string azon = Console.ReadLine();
+
+            int index = KeresIndex(azon);
+
+            if (index == -1)
+            {
+                Console.WriteLine("Nincs ilyen dolgozó.");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Write("Új név: ");
+            string ujNev = Console.ReadLine();
+            if (ujNev != "")
+            {
+                dolgozok[index].Nev = ujNev;
+            }
+
+            Console.Write("Új részleg: ");
+            string ujReszleg = Console.ReadLine();
+            if (ujReszleg != "")
+            {
+                dolgozok[index].Reszleg = ujReszleg;
+            }
+
+            Console.Write("Új fizetés: ");
+            string fizetesSzoveg = Console.ReadLine();
+            if (fizetesSzoveg != "")
+            {
+                try
+                {
+                    int ujFizetes = int.Parse(fizetesSzoveg);
+                    if (ujFizetes >= 0)
+                    {
+                        dolgozok[index].Fizetes = ujFizetes;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Negatív fizetés nem adható meg.");
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Hibás fizetés, a régi marad.");
+                }
+            }
+
+            Console.Write("Új életkor: ");
+            string eletkorSzoveg = Console.ReadLine();
+            if (eletkorSzoveg != "")
+            {
+                try
+                {
+                    int ujEletkor = int.Parse(eletkorSzoveg);
+                    if (ujEletkor >= 16 && ujEletkor <= 100)
+                    {
+                        dolgozok[index].Eletkor = ujEletkor;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hibás életkor, a régi marad.");
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Hibás életkor, a régi marad.");
+                }
+            }
+
+            Console.WriteLine("Sikeres módosítás.");
+            Console.WriteLine("Nyomjon egy gombot a folytatáshoz...");
+            Console.ReadKey();
+        }
+
     }
 }
