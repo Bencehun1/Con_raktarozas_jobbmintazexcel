@@ -464,5 +464,33 @@ namespace DolgozoiNyilvantarto
      return -1;
  }
 
+                static void Mentes()
+        {
+            try
+            {
+                StreamWriter sw = new StreamWriter(fajlNev);
+
+                int i = 0;
+                while (i < db)
+                {
+                    sw.WriteLine(
+                        dolgozok[i].Azonosito + ";" +
+                        dolgozok[i].Nev + ";" +
+                        dolgozok[i].Reszleg + ";" +
+                        dolgozok[i].Fizetes + ";" +
+                        dolgozok[i].Eletkor
+                    );
+                    i++;
+                }
+
+                sw.Close();
+            }
+            catch
+            {
+                Console.WriteLine("Hiba mentés közben!");
+                Console.ReadKey();
+            }
+        }
+
     }
 }
