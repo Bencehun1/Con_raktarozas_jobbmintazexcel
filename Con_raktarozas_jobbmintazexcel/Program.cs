@@ -310,5 +310,128 @@ namespace DolgozoiNyilvantarto
             Console.ReadKey();
         }
 
+                static void Torles()
+        {
+            Console.Clear();
+            Console.WriteLine("=== DOLGOZÓ TÖRLÉSE ===");
+            Console.Write("Adja meg a törlendő dolgozó azonosítóját: ");
+            string azon = Console.ReadLine();
+
+            int index = KeresIndex(azon);
+
+            if (index == -1)
+            {
+                Console.WriteLine("Nincs ilyen dolgozó.");
+                Console.ReadKey();
+                return;
+            }
+
+            int i = index;
+            while (i < db - 1)
+            {
+                dolgozok[i] = dolgozok[i + 1];
+                i++;
+            }
+
+            dolgozok[db - 1] = null;
+            db--;
+
+            Console.WriteLine("Dolgozó sikeresen törölve.");
+            Console.WriteLine("Nyomjon egy gombot a folytatáshoz...");
+            Console.ReadKey();
+        }
+
+        static void Statisztika()
+        {
+            Console.Clear();
+            Console.WriteLine("=== STATISZTIKA ===");
+
+            if (db == 0)
+            {
+                Console.WriteLine("Nincs adat.");
+                Console.ReadKey();
+                return;
+            }
+
+            int osszeg = 0;
+            int legmagasabb = dolgozok[0].Fizetes;
+            int legalacsonyabb = dolgozok[0].Fizetes;
+            string legtobbetKereso = dolgozok[0].Nev;
+            string legkevesebbetKereso = dolgozok[0].Nev;
+
+            int i = 0;
+            while (i < db)
+            {
+                osszeg = osszeg + dolgozok[i].Fizetes;
+
+                if (dolgozok[i].Fizetes > legmagasabb)
+                {
+                    legmagasabb = dolgozok[i].Fizetes;
+                    legtobbetKereso = dolgozok[i].Nev;
+                }
+
+                if (dolgozok[i].Fizetes < legalacsonyabb)
+                {
+                    legalacsonyabb = dolgozok[i].Fizetes;
+                    legkevesebbetKereso = dolgozok[i].Nev;
+                }
+
+                i++;
+            }
+
+            double atlag = (double)osszeg / db;
+
+            Console.WriteLine("Dolgozók száma: " + db);
+            Console.WriteLine("Átlagfizetés: " + atlag + " Ft");
+            Console.WriteLine("Legmagasabb fizetés: " + legmagasabb + " Ft (" + legtobbetKereso + ")");
+            Console.WriteLine("Legalacsonyabb fizetés: " + legalacsonyabb + " Ft (" + legkevesebbetKereso + ")");
+            Console.WriteLine();
+
+            Console.WriteLine("Részlegenkénti darabszám:");
+
+            string[] reszlegek = new string[100];
+            int[] darabok = new int[100];
+            int reszlegDb = 0;
+
+            i = 0;
+            while (i < db)
+            {
+                int holVan = -1;
+                int j = 0;
+
+                while (j < reszlegDb)
+                {
+                    if (reszlegek[j] == dolgozok[i].Reszleg)
+                    {
+                        holVan = j;
+                    }
+                    j++;
+                }
+
+                if (holVan == -1)
+                {
+                    reszlegek[reszlegDb] = dolgozok[i].Reszleg;
+                    darabok[reszlegDb] = 1;
+                    reszlegDb++;
+                }
+                else
+                {
+                    darabok[holVan]++;
+                }
+
+                i++;
+            }
+
+            i = 0;
+            while (i < reszlegDb)
+            {
+                Console.WriteLine(reszlegek[i] + ": " + darabok[i] + " fő");
+                i++;
+            }
+
+            Console.WriteLine("Nyomjon egy gombot a folytatáshoz...");
+            Console.ReadKey();
+        }
+
     }
 }
