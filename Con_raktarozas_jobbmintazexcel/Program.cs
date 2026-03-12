@@ -174,7 +174,36 @@ namespace DolgozoiNyilvantarto
     Console.WriteLine("Nyomjon egy gombot a folytatáshoz...");
     Console.ReadKey();
 }
-        
+
+            
+            static void Listazas()
+{
+    Console.Clear();
+    Console.WriteLine("=== DOLGOZÓK LISTÁJA ===");
+
+    if (db == 0)
+    {
+        Console.WriteLine("Nincs még dolgozó.");
+    }
+    else
+    {
+        int i = 0;
+        while (i < db)
+        {
+            Console.WriteLine((i + 1) + ". dolgozó");
+            Console.WriteLine("Azonosító: " + dolgozok[i].Azonosito);
+            Console.WriteLine("Név: " + dolgozok[i].Nev);
+            Console.WriteLine("Részleg: " + dolgozok[i].Reszleg);
+            Console.WriteLine("Fizetés: " + dolgozok[i].Fizetes + " Ft");
+            Console.WriteLine("Életkor: " + dolgozok[i].Eletkor);
+            Console.WriteLine("----------------------------");
+            i++;
+        }
+    }
+
+    Console.WriteLine("Nyomjon egy gombot a folytatáshoz...");
+    Console.ReadKey();
+}
 
     }
 }
