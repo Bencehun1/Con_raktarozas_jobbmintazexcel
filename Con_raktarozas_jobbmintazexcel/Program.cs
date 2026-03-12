@@ -433,5 +433,36 @@ namespace DolgozoiNyilvantarto
             Console.ReadKey();
         }
 
+         static bool LetezikAzonosito(string azon)
+ {
+     int i = 0;
+     while (i < db)
+     {
+         if (dolgozok[i].Azonosito == azon)
+         {
+             return true;
+         }
+         i++;
+     }
+
+     return false;
+ }
+
+
+ static int KeresIndex(string azon)
+ {
+     int i = 0;
+     while (i < db)
+     {
+         if (dolgozok[i].Azonosito == azon)
+         {
+             return i;
+         }
+         i++;
+     }
+
+     return -1;
+ }
+
     }
 }
